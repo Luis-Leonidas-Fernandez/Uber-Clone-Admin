@@ -1,0 +1,60 @@
+ List<PostsModel> postList = [] ;
+
+  Future<List<PostsModel>> getPostApi ()async{
+    final resposne = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts')) ;
+    var data = jsonDecode(resposne.body.toString());
+    if(resposne.statusCode == 200){
+      postList.clear();
+      for(Map i in data){
+        postList.add(PostsModel.fromJson(i));
+      }
+      return postList ;
+    }else {
+      return postList ;
+    }
+
+
+
+    List<MyModel> myModels;
+    var response = await http.get("myUrl");
+
+    myModels=(json.decode(response.body) as List).map((i) => MyModel.fromJson(i)).toList();
+
+
+    List<dynamic> parsedListJson = jsonDecode(response.body);
+
+    List<dynamic> parsedListJson = jsonDecode("your json string");
+    List<Item> itemsList = List<Item>.from(parsedListJson.map((i) => Item.fromJson(i)));
+
+
+    import 'dart:convert';
+  main() {
+  String arrayObjsText =
+      '{"tags": [{"name": "dart", "quantity": 12}, {"name": "flutter", "quantity": 25}, {"name": "json", "quantity": 8}]}';
+  var tagObjsJson = jsonDecode(arrayObjsText)['tags'] as List;
+  List<Tag> tagObjs = tagObjsJson.map((tagJson) => Tag.fromJson(tagJson)).toList();
+  print(tagObjs);
+
+  Voy a explicar el código con más detalle. Es sencillo.
+
+jsonDecode() convierte las 'etiquetas' del objeto JSON en un objeto dinámico. Después de eso, usamos corchetes ['etiquetas'] para recuperar una matriz JSON.
+Debido a que List produce List<dynamic>, usaremos map() para convertir cada elemento dinámico en List en un objeto Tag.
+Finalmente, el resultado Iterable anterior se convierte en un objeto List<Tag> usando .toList().
+Ahora, si ejecutamos el código, obtendremos algo como esto
+
+[{ dart, 12 }, { flutter, 25 }, { json, 8 }]
+
+json anidado con array
+List<Tag> _tags = tagObjsJson.map((tagJson) => Tag.fromJson(tagJson)).toList();
+
+import 'dart:convert';
+main() {
+  String complexText =
+      '{"title": "Dart Tutorial", "description": "Way to parse Json", "author": {"name": "bezkoder", "age": 30}, "tags": [{"name": "dart", "quantity": 12}, {"name": "flutter", "quantity": 25}]}';
+  Tutorial complexTutorial = Tutorial.fromJson(jsonDecode(complexText));
+  print(complexTutorial);
+
+{ Dart Tutorial, Way to parse Json, { bezkoder, 30 }, [{ dart, 12 }, { flutter, 25 }] }
+
+
+}
